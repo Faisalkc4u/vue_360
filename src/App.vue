@@ -1,15 +1,52 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <div class="container">
+      <div class="row">
+
+
+
+        <!-- Example 3 - Motorcycle - 36 images -->
+        <div class="col-12 col-md-6 mb-4 card p-0">
+          <!-- <h4 class="my-2 text-center">72 Images - Box Shadow</h4> -->
+          <vue-three-sixty :amount=30 imagePath="https://bseen.app/assets/carSlide/" fileName="{index}.png" boxShadow>
+
+          </vue-three-sixty>
+        </div>
+        <!--/ Example 3 - Motorcycle - 36 images -->
+
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import I360Viewer from './components/I360Viewer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    VueThreeSixty: I360Viewer
+  },
+  mounted() {
+    this.disableZoomin();
+  },
+  methods: {
+    disableZoomin() {
+      document.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
+        document.body.style.zoom = 0.99;
+      });
+      document.addEventListener("gesturechange", function (e) {
+        e.preventDefault();
+        document.body.style.zoom = 0.99;
+      });
+
+      document.addEventListener("gestureend", function (e) {
+        e.preventDefault();
+        document.body.style.zoom = 1;
+      });
+    }
   }
 }
 </script>
